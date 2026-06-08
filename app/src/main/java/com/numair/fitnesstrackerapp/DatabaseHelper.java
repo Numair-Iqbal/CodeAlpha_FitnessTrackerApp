@@ -100,7 +100,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     // Total steps, calories, minutes lo kisi date ke liye
     public int[] getTotalsForDate(String date) {
-        int[] totals = {0, 0, 0}; // steps, calories, minutes
+        int[] totals = {0, 0, 0};
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT SUM(" + COL_STEPS + "), SUM(" + COL_CALORIES + "), SUM(" + COL_MINUTES + ") FROM " + TABLE + " WHERE " + COL_DATE + "=?", new String[]{date});
         if (cursor.moveToFirst()) {
@@ -111,6 +111,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cursor.close();
         db.close();
         return totals;
+    }
+
+    // Entry update karo
+    public void updateEntry(int id, String exerciseType, int steps, int calories, int minutes) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COL_EXERCISE, exerciseType);
+        values.put(COL_STEPS, steps);
+        values.put(COL_CALORIES, calories);
+        values.put(COL_MINUTES, minutes);
+        db.update(TABLE, values, COL_ID + "=?", new String[]{String.valueOf(id)});
+        db.close();
     }
 
     // Entry delete karo

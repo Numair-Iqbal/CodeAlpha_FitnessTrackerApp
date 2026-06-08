@@ -117,6 +117,14 @@
             android:text="Cancel"
             android:backgroundTint="#607D8B"
             android:textSize="16sp"/>
+        <Button
+            android:id="@+id/btnDelete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Delete Activity"
+            android:backgroundTint="#F44336"
+            android:textSize="16sp"
+            android:layout_marginTop="12dp"/>
 
     </LinearLayout>
 </ScrollView>

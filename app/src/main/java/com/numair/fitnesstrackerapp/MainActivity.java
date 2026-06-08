@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     Button btnAddActivity;
     ListView lvActivities;
     DatabaseHelper db;
+    List<FitnessEntry> allEntries;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,12 +37,22 @@ public class MainActivity extends AppCompatActivity {
         progressMinutes = findViewById(R.id.progressMinutes);
         btnAddActivity = findViewById(R.id.btnAddActivity);
         lvActivities = findViewById(R.id.lvActivities);
-
         db = new DatabaseHelper(this);
 
-        // Add Activity button
         btnAddActivity.setOnClickListener(v -> {
             startActivity(new Intent(MainActivity.this, AddActivityActivity.class));
+        });
+
+        // List item pe click — edit/delete
+        lvActivities.setOnItemClickListener((parent, view, position, id) -> {
+            FitnessEntry entry = allEntries.get(position);
+            Intent intent = new Intent(MainActivity.this, AddActivityActivity.class);
+            intent.putExtra("id", entry.getId());
+            intent.putExtra("exerciseType", entry.getExerciseType());
+            intent.putExtra("steps", entry.getSteps());
+            intent.putExtra("calories", entry.getCalories());
+            intent.putExtra("minutes", entry.getWorkoutMinutes());
+            startActivity(intent);
         });
     }
 
@@ -52,29 +63,24 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void loadDashboard() {
-        // Aaj ki date
         String today = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
         String displayDate = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault()).format(new Date());
         tvDate.setText("Today: " + displayDate);
 
-        // Aaj ke totals lo
         int[] totals = db.getTotalsForDate(today);
         int steps = totals[0];
         int calories = totals[1];
         int minutes = totals[2];
 
-        // Summary update karo
         tvSteps.setText(steps + " / 10,000 steps");
         tvCalories.setText(calories + " / 500 kcal");
         tvMinutes.setText(minutes + " / 60 mins");
 
-        // Progress bars update karo
         progressSteps.setProgress(Math.min(steps, 10000));
         progressCalories.setProgress(Math.min(calories, 500));
         progressMinutes.setProgress(Math.min(minutes, 60));
 
-        // Recent activities list
-        List<FitnessEntry> allEntries = db.getAllEntries();
+        allEntries = db.getAllEntries();
         ArrayList<String> displayList = new ArrayList<>();
 
         if (allEntries.isEmpty()) {
