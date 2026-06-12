@@ -70,8 +70,8 @@ FitnessTrackerApp/
 ## 📸 App Screenshots
 
 | Dashboard | Log Activity |
-|:---:|:---:|
-| Today's summary with progress bars | Add or edit fitness entries |
+|-----------|--------------|
+| ![Dashboard](App%20Screenshots/Fitness%20Tracker%20Dashboard.jpeg) | ![Log Activity](App%20Screenshots/Fitness%20Tracker%20Log%20Activity.jpeg) |
 
 ---
 
