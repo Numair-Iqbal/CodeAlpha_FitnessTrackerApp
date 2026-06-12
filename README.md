@@ -71,7 +71,7 @@ FitnessTrackerApp/
 
 | Dashboard | Log Activity |
 |-----------|--------------|
-| <img src="App%20Screenshots/Fitness%20Tracker%20Dashboard.jpeg" width="250"> | <img src="App%20Screenshots/Fitness%20Tracker%20Log%20Activity.jpeg" width="250"> |
+| <img src="App%20Screenshots/FitnessTracker%20Dashboard.jpeg" width="250"> | <img src="App%20Screenshots/Fitness%20Tracker%20Log%20Activity.jpeg" width="250"> |
 
 ---
 
