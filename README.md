@@ -67,7 +67,7 @@ FitnessTrackerApp/
 └── activity_add.xml            → Log activity layout
 ---
 
-## 📸 App Screens
+## 📸 App Screenshots
 
 | Dashboard | Log Activity |
 |:---:|:---:|
